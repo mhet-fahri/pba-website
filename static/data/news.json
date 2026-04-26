@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Inovasi Kurikulum PBA: Menyongsong Era Digital 5.0",
+        "date": "2026-04-20",
+        "category": "Pendidikan",
+        "excerpt": "Diskusi panel tentang bagaimana integrasi teknologi AI dalam pengajaran Bahasa Arab di sekolah menengah.",
+        "content": "<p>Program Studi Pendidikan Bahasa Arab (PBA) UIN Syarif Hidayatullah Jakarta mengadakan seminar nasional yang membahas inovasi kurikulum di era Digital 5.0. Seminar ini menghadirkan para ahli teknologi pendidikan dan praktisi pengajaran bahasa Arab.</p><p>Fokus utama diskusi adalah bagaimana memanfaatkan Kecerdasan Buatan (AI) untuk meningkatkan efektivitas pembelajaran bahasa. 'Teknologi bukan pengganti guru, melainkan alat yang memperkuat peran guru dalam menciptakan pengalaman belajar yang lebih personal,' ujar Kaprodi PBA dalam sambutannya.</p><p>Hasil dari seminar ini akan menjadi landasan bagi pengembangan kurikulum PBA ke depan agar tetap relevan dengan kebutuhan zaman.</p>",
+        "image_url": "news-card-1"
+    },
+    {
+        "id": 2,
+        "title": "Analisis Linguistik Komparatif: Arab-Indonesia dalam Karya Klasik",
+        "date": "2026-04-15",
+        "category": "Penelitian",
+        "excerpt": "Penelitian terbaru mengungkapkan pengaruh struktur gramatikal Arab terhadap perkembangan sastra Melayu klasik.",
+        "content": "<p>Tim peneliti dosen PBA baru saja merilis hasil studi komparatif antara struktur bahasa Arab dan bahasa Indonesia klasik. Penelitian ini menemukan banyak serapan pola pikir dan struktur gramatikal yang telah berakulturasi selama berabad-abad.</p><p>Studi ini menganalisis manuskrip-manuskrip kuno yang disimpan di Perpustakaan Nasional. Temuan ini diharapkan dapat memberikan perspektif baru dalam memahami sejarah perkembangan bahasa Melayu-Indonesia serta memperkuat hubungan akademis lintas budaya.</p>",
+        "image_url": "news-card-2"
+    },
+    {
+        "id": 3,
+        "title": "Seminar Internasional Literasi Bahasa Arab (SILBA) 2026",
+        "date": "2026-04-10",
+        "category": "Acara",
+        "excerpt": "Menghadirkan pembicara dari Universitas Al-Azhar dan Universitas Utrecht untuk membahas masa depan literasi.",
+        "content": "<p>PBA UIN Jakarta akan menjadi tuan rumah Seminar Internasional Literasi Bahasa Arab (SILBA) 2026 yang akan digelar pada bulan Agustus mendatang. Acara ini merupakan agenda rutin tahunan yang bertujuan untuk mendiseminasikan hasil riset terkini.</p><p>Tahun ini, SILBA mengusung tema 'Literasi Digital dalam Pembelajaran Bahasa Arab'. Pembicara utama yang telah mengonfirmasi kehadiran antara lain pakar linguistik dari Universitas Al-Azhar, Mesir, dan peneliti pendidikan dari Universitas Utrecht, Belanda.</p>",
+        "image_url": "news-card-3"
+    },
+    {
+        "id": 4,
+        "title": "Prestasi Mahasiswa: Juara 1 Debat Bahasa Arab Nasional",
+        "date": "2026-04-05",
+        "category": "Prestasi",
+        "excerpt": "Delegasi PBA UIN Jakarta berhasil meraih predikat juara pertama dalam ajang Festival Bahasa Arab Nasional.",
+        "content": "<p>Kabar gembira datang dari tim debat PBA UIN Jakarta yang berhasil menyabet gelar Juara 1 dalam Festival Bahasa Arab Nasional yang diselenggarakan di Yogyakarta. Tim yang terdiri dari tiga mahasiswa semester 6 ini berhasil mengungguli universitas-universitas besar lainnya.</p><p>Kemenangan ini membuktikan kualitas kompetensi mahasiswa PBA UIN Jakarta dalam penguasaan bahasa Arab secara aktif dan kritis.</p>",
+        "image_url": "news-card-4"
+    }
+]

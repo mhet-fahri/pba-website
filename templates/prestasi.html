@@ -1,0 +1,210 @@
+{% extends 'layout.html' %}
+
+{% block title %}Prestasi Mahasiswa | PBA UIN Jakarta{% endblock %}
+
+{% block extra_head %}
+<style>
+    .prestasi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .prestasi-card {
+        background: var(--white);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .prestasi-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        border-color: var(--accent-blue);
+    }
+
+    .prestasi-header {
+        padding: 2rem;
+        background: var(--bg-alt);
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+    }
+
+    .prestasi-tag {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .tag-internasional { background: #FDE68A; color: #92400E; }
+    .tag-nasional { background: #DBEAFE; color: #1E40AF; }
+    .tag-provinsi { background: #D1FAE5; color: #065F46; }
+
+    .prestasi-year {
+        font-weight: 700;
+        color: var(--accent-blue);
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .prestasi-title {
+        font-size: 1.25rem;
+        color: var(--primary-blue);
+        line-height: 1.4;
+        margin-bottom: 1rem;
+    }
+
+    .prestasi-body {
+        padding: 2rem;
+        flex-grow: 1;
+    }
+
+    .student-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .student-avatar {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-blue);
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .student-name {
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .prestasi-desc {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .prestasi-footer {
+        padding: 1.5rem 2rem;
+        background: #f8fafc;
+        border-top: 1px solid #eee;
+        font-size: 0.85rem;
+        color: #64748b;
+        font-style: italic;
+    }
+
+    .filter-bar {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        padding: 0.5rem 1.5rem;
+        border-radius: 30px;
+        border: 1px solid var(--border-color);
+        background: var(--white);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .filter-btn.active {
+        background: var(--primary-blue);
+        color: var(--white);
+        border-color: var(--primary-blue);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-prestasi">
+    <div class="hero-overlay"></div>
+    <div class="container page-title">
+        <h1>Prestasi Mahasiswa</h1>
+        <p>Kebanggaan Program Studi Pendidikan Bahasa Arab dalam berbagai ajang kompetisi.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="internasional">Internasional</button>
+            <button class="filter-btn" data-filter="nasional">Nasional</button>
+            <button class="filter-btn" data-filter="provinsi">Provinsi</button>
+        </div>
+
+        <div class="prestasi-grid">
+            {% for item in prestasi %}
+            <div class="prestasi-card reveal active" data-category="{{ item.category | lower }}">
+                <div class="prestasi-header">
+                    <span class="prestasi-tag tag-{{ item.category | lower }}">{{ item.category }}</span>
+                    <span class="prestasi-year">{{ item.year }}</span>
+                    <h3 class="prestasi-title">{{ item.title }}</h3>
+                </div>
+                <div class="prestasi-body">
+                    <div class="student-info">
+                        <div class="student-avatar">{{ item.name[0] }}</div>
+                        <div class="student-name">{{ item.name }}</div>
+                    </div>
+                    <p class="prestasi-desc">{{ item.description }}</p>
+                </div>
+                <div class="prestasi-footer">
+                    Penyelenggara: {{ item.institution }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.prestasi-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter cards
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                        setTimeout(() => card.style.opacity = '1', 10);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

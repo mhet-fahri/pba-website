@@ -1,0 +1,65 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}Dashboard Overview{% endblock %}
+{% block page_title %}Selamat Datang, Pengelola Konten{% endblock %}
+
+{% block admin_content %}
+<div class="stats-grid">
+    <div class="stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <small>Total Berita</small>
+                <span>{{ news_count }}</span>
+            </div>
+            <div style="background: rgba(0, 119, 200, 0.1); padding: 1rem; border-radius: 12px; color: var(--accent-blue);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l4 4v10a2 2 0 0 1-2 2z"></path><polyline points="14 4 14 8 18 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <small>Kegiatan Aktif</small>
+                <span>{{ events_count }}</span>
+            </div>
+            <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 12px; color: #10b981;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            </div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <small>Testimoni Alumni</small>
+                <span>{{ alumni_count }}</span>
+            </div>
+            <div style="background: rgba(245, 158, 11, 0.1); padding: 1rem; border-radius: 12px; color: #f59e0b;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            </div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <small>Total Publikasi</small>
+                <span>{{ publications_count }}</span>
+            </div>
+            <div style="background: rgba(139, 92, 246, 0.1); padding: 1rem; border-radius: 12px; color: #8b5cf6;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="admin-card">
+    <h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Panduan Penggunaan</h3>
+    <div style="margin-top: 1rem; color: var(--text-secondary); line-height: 1.8; font-size: 1rem;">
+        <p>Gunakan panel ini untuk memperbarui informasi strategis di website PBA UIN Jakarta. Beberapa tips cepat:</p>
+        <ul style="margin-top: 1rem; margin-left: 1.5rem;">
+            <li><strong>Berita:</strong> Gunakan judul yang menarik dan deskriptif.</li>
+            <li><strong>Kegiatan:</strong> Pastikan tanggal dan lokasi sudah akurat.</li>
+            <li><strong>Alumni:</strong> Unggah kutipan yang dapat menginspirasi calon mahasiswa.</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

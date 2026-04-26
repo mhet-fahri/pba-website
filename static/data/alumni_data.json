@@ -1,0 +1,37 @@
+{
+    "summary": [
+        {
+            "label": "Total Alumni",
+            "value": "2,840",
+            "icon": "users"
+        },
+        {
+            "label": "Tingkat Serapan Kerja",
+            "value": "92%",
+            "icon": "briefcase"
+        },
+        {
+            "label": "Waktu Tunggu Kerja",
+            "value": "3.2 Bulan",
+            "icon": "clock"
+        },
+        {
+            "label": "Gaji Pertama (Rata-rata)",
+            "value": "Rp 4.5jt",
+            "icon": "trending-up"
+        }
+    ],
+    "employment_sectors": [
+        {"sector": "Tenaga Pendidik (Guru/Dosen)", "percentage": 65},
+        {"sector": "Penerjemah & Editor", "percentage": 12},
+        {"sector": "Instansi Pemerintah/ASN", "percentage": 10},
+        {"sector": "Wirausaha", "percentage": 8},
+        {"sector": "Sektor Lainnya", "percentage": 5}
+    ],
+    "work_locations": [
+        {"location": "Jabodetabek", "count": 1420},
+        {"location": "Luar Jabodetabek", "count": 980},
+        {"location": "Luar Negeri (Timur Tengah)", "count": 240},
+        {"location": "Lainnya", "count": 200}
+    ]
+}

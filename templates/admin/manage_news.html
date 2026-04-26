@@ -1,0 +1,85 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}Kelola Berita{% endblock %}
+{% block page_title %}Kelola Berita & Artikel{% endblock %}
+
+{% block admin_content %}
+<div class="admin-card">
+    <h3>Tambah Berita Baru</h3>
+    <form method="POST" class="admin-form" style="margin-top: 1.5rem;">
+        <input type="hidden" name="action" value="add">
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Kategori</label>
+                <select name="category" class="form-control" required>
+                    <option value="Akademik">Akademik</option>
+                    <option value="Kegiatan">Kegiatan</option>
+                    <option value="Pengumuman">Pengumuman</option>
+                    <option value="Prestasi">Prestasi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tanggal</label>
+                <input type="date" name="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Link Gambar (URL)</label>
+                <input type="text" name="image_url" class="form-control" placeholder="https://example.com/image.jpg" required>
+            </div>
+        </div>
+
+        <div class="form-group" style="background: rgba(0, 119, 200, 0.03); padding: 1.5rem; border-radius: 15px; border: 1px dashed var(--accent-blue);">
+            <div class="form-group">
+                <label>Judul Berita</label>
+                <input type="text" name="title" id="title_id" class="form-control" placeholder="Contoh: PBA UIN Raih Akreditasi Unggul" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Ringkasan (Excerpt)</label>
+                <textarea name="excerpt" id="excerpt_id" class="form-control" rows="2" placeholder="Tuliskan ringkasan singkat berita..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Konten Berita</label>
+                <textarea name="content" id="content_id" class="form-control" rows="10" placeholder="Tuliskan isi lengkap berita di sini..." required></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="height: 3.5rem; font-size: 1.1rem; margin-top: 1rem;">Simpan Berita & Publish</button>
+    </form>
+</div>
+
+<div class="admin-card">
+    <h3>Daftar Berita</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Judul</th>
+                <th>Kategori</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in news|reverse %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td><strong>{{ item.title }}</strong></td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.date }}</td>
+                <td class="action-btns">
+                    <a href="{{ url_for('edit_news', news_id=item.id) }}" class="btn btn-sm btn-primary" style="background: var(--accent-blue); padding: 0.5rem 1rem; border-radius: 8px;">Edit</a>
+                    <form method="POST" onsubmit="return confirm('Yakin ingin menghapus berita ini?')" style="display: inline;">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" value="{{ item.id }}">
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

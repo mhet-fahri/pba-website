@@ -1,0 +1,99 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}Kelola Publikasi{% endblock %}
+{% block page_title %}Kelola Publikasi & Riset{% endblock %}
+
+{% block admin_content %}
+<div class="admin-card">
+    <h3>Tambah Publikasi Baru</h3>
+    <form method="POST" class="admin-form" style="margin-top: 1.5rem;">
+        <input type="hidden" name="action" value="add">
+        
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+                <label>Tahun</label>
+                <input type="number" name="year" class="form-control" placeholder="2024" required>
+            </div>
+            <div class="form-group">
+                <label>Tipe</label>
+                <select name="type" class="form-control" required>
+                    <option value="Journal">Jurnal</option>
+                    <option value="Book">Buku</option>
+                    <option value="Proceeding">Prosiding</option>
+                    <option value="Other">Lainnya</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Kategori</label>
+                <select name="category" class="form-control" required>
+                    <option value="Technology">Technology</option>
+                    <option value="Linguistics">Linguistics</option>
+                    <option value="Pedagogy">Pedagogy</option>
+                    <option value="Curriculum">Curriculum</option>
+                    <option value="Research Method">Research Method</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Judul Publikasi</label>
+            <input type="text" name="title" class="form-control" placeholder="Judul lengkap publikasi atau riset" required>
+        </div>
+
+        <div class="form-group">
+            <label>Penulis</label>
+            <input type="text" name="authors" class="form-control" placeholder="Contoh: Dr. Ahmad, Siti Aminah" required>
+        </div>
+
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+                <label>Penerbit / Nama Jurnal</label>
+                <input type="text" name="publisher" class="form-control" placeholder="Contoh: Jurnal Arabiyat" required>
+            </div>
+            <div class="form-group">
+                <label>Link (URL)</label>
+                <input type="text" name="link" class="form-control" placeholder="#" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="height: 3.5rem; font-size: 1.1rem; margin-top: 1rem;">Simpan Publikasi</button>
+    </form>
+</div>
+
+<div class="admin-card">
+    <h3>Daftar Publikasi</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Judul</th>
+                    <th>Penulis</th>
+                    <th>Tahun</th>
+                    <th>Tipe</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in publications|reverse %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td><strong>{{ item.title }}</strong></td>
+                    <td>{{ item.authors }}</td>
+                    <td>{{ item.year }}</td>
+                    <td><span class="badge" style="background: var(--admin-bg); padding: 0.25rem 0.5rem; border-radius: 5px; font-size: 0.8rem;">{{ item.type }}</span></td>
+                    <td class="action-btns" style="white-space: nowrap;">
+                        <a href="{{ url_for('edit_publication', pub_id=item.id) }}" class="btn btn-sm btn-primary" style="background: var(--accent-blue); padding: 0.5rem 1rem; border-radius: 8px; color: white; text-decoration: none;">Edit</a>
+                        <form method="POST" onsubmit="return confirm('Yakin ingin menghapus publikasi ini?')" style="display: inline;">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="id" value="{{ item.id }}">
+                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

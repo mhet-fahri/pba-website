@@ -1,0 +1,257 @@
+{% extends 'layout.html' %}
+
+{% block title %}Mata Kuliah | PBA UIN Jakarta{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-cpl">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="page-title reveal">
+            <h1>Kurikulum & Mata Kuliah</h1>
+            <p>Daftar lengkap mata kuliah yang ditawarkan pada Program Studi Pendidikan Bahasa Arab UIN Syarif Hidayatullah Jakarta.</p>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="filter-section reveal">
+            <div class="filter-group">
+                <label for="searchCourse">Cari Mata Kuliah</label>
+                <input type="text" id="searchCourse" placeholder="Masukkan nama atau kode mata kuliah...">
+            </div>
+            <div class="filter-group">
+                <label for="filterSemester">Semester</label>
+                <select id="filterSemester">
+                    <option value="all">Semua Semester</option>
+                    {% for i in range(1, 9) %}
+                    <option value="{{ i }}">Semester {{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="course-table-container reveal">
+            <table class="course-table" id="courseTable">
+                <thead>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Nama Mata Kuliah</th>
+                        <th>SKS</th>
+                        <th>Semester</th>
+                        <th>Jenis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {# --- Mandatory Courses --- #}
+                    {% for mk in mandatory %}
+                    <tr class="course-row" data-semester="{{ mk['Semester'] }}" data-name="{{ mk['Nama Mata Kuliah'] | lower }}" data-code="{{ mk['Kode Mata Kuliah'] | lower }}">
+                        <td class="col-code"><strong>{{ mk['Kode Mata Kuliah'] }}</strong></td>
+                        <td class="col-name">{{ mk['Nama Mata Kuliah'] }}</td>
+                        <td class="col-sks">{{ mk['SKS'] }}</td>
+                        <td><span class="badge badge-semester">Smt {{ mk['Semester'] }}</span></td>
+                        <td><span class="badge badge-type">{{ mk['Jenis MK'] }}</span></td>
+                    </tr>
+                    <tr class="description-row" data-semester="{{ mk['Semester'] }}">
+                        <td colspan="5">
+                            <div class="description-content">
+                                <h5>Deskripsi Mata Kuliah</h5>
+                                <p class="desc-text">{{ mk['Deskripsi'] }}</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    {# --- Optional Selector Rows for Semester 6 --- #}
+                    {% for i in range(1, 3) %}
+                    <tr class="course-row selector-row" data-semester="6" data-name="pilihan" data-code="pilihan">
+                        <td class="col-code"><strong>-</strong></td>
+                        <td class="col-name">
+                            <select class="optional-selector" data-target-id="smt6-{{ i }}">
+                                <option value="" disabled selected>-- Pilih Mata Kuliah Pilihan (Smt 6) --</option>
+                                {% for opt in optional %}
+                                <option value="{{ opt['Kode Mata Kuliah'] }}">{{ opt['Nama Mata Kuliah'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td class="col-sks">-</td>
+                        <td><span class="badge badge-semester">Smt 6</span></td>
+                        <td><span class="badge badge-type" style="background: #fbbf24; color: #000;">PILIHAN</span></td>
+                    </tr>
+                    <tr class="description-row" data-semester="6" id="desc-smt6-{{ i }}">
+                        <td colspan="5">
+                            <div class="description-content">
+                                <h5>Deskripsi Mata Kuliah</h5>
+                                <p class="desc-text">Silakan pilih mata kuliah untuk melihat deskripsi.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    {# --- Optional Selector Row for Semester 7 --- #}
+                    <tr class="course-row selector-row" data-semester="7" data-name="pilihan" data-code="pilihan">
+                        <td class="col-code"><strong>-</strong></td>
+                        <td class="col-name">
+                            <select class="optional-selector" data-target-id="smt7-1">
+                                <option value="" disabled selected>-- Pilih Mata Kuliah Pilihan (Smt 7) --</option>
+                                {% for opt in optional %}
+                                <option value="{{ opt['Kode Mata Kuliah'] }}">{{ opt['Nama Mata Kuliah'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td class="col-sks">-</td>
+                        <td><span class="badge badge-semester">Smt 7</span></td>
+                        <td><span class="badge badge-type" style="background: #fbbf24; color: #000;">PILIHAN</span></td>
+                    </tr>
+                    <tr class="description-row" data-semester="7" id="desc-smt7-1">
+                        <td colspan="5">
+                            <div class="description-content">
+                                <h5>Deskripsi Mata Kuliah</h5>
+                                <p class="desc-text">Silakan pilih mata kuliah untuk melihat deskripsi.</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="noResults" class="no-results">
+                <p>Tidak ada mata kuliah yang cocok dengan pencarian Anda.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Data for JS #}
+<script id="optionalData" type="application/json">
+    {{ optional | tojson }}
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchCourse');
+        const semesterSelect = document.getElementById('filterSemester');
+        const rows = document.querySelectorAll('.course-row');
+        const noResults = document.getElementById('noResults');
+        const optionalData = JSON.parse(document.getElementById('optionalData').textContent);
+
+        function filterCourses() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedSemester = semesterSelect.value;
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const nameAttr = row.getAttribute('data-name') || "";
+                const codeAttr = row.getAttribute('data-code') || "";
+                const semester = row.getAttribute('data-semester');
+                const descRow = row.nextElementSibling;
+
+                // For selector rows, we check the current selected value's text if any
+                let currentName = nameAttr;
+                let currentCode = codeAttr;
+                if (row.classList.contains('selector-row')) {
+                    const sel = row.querySelector('select');
+                    if (sel.value) {
+                        const opt = optionalData.find(o => o['Kode Mata Kuliah'] === sel.value);
+                        if (opt) {
+                            currentName = opt['Nama Mata Kuliah'].toLowerCase();
+                            currentCode = opt['Kode Mata Kuliah'].toLowerCase();
+                        }
+                    }
+                }
+
+                const matchesSearch = currentName.includes(searchTerm) || currentCode.includes(searchTerm);
+                const matchesSemester = selectedSemester === 'all' || semester === selectedSemester;
+
+                if (matchesSearch && matchesSemester) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                    if (descRow && descRow.classList.contains('description-row')) {
+                        descRow.classList.remove('active');
+                    }
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+                document.getElementById('courseTable').querySelector('tbody').style.display = 'none';
+            } else {
+                noResults.style.display = 'none';
+                document.getElementById('courseTable').querySelector('tbody').style.display = '';
+            }
+        }
+
+        // Click to toggle description
+        rows.forEach(row => {
+            row.addEventListener('click', function(e) {
+                // Don't toggle if clicking the select element itself
+                if (e.target.tagName === 'SELECT' || e.target.tagName === 'OPTION') return;
+
+                const descRow = this.nextElementSibling;
+                if (descRow && descRow.classList.contains('description-row')) {
+                    const isActive = descRow.classList.contains('active');
+                    
+                    document.querySelectorAll('.description-row.active').forEach(activeRow => {
+                        if (activeRow !== descRow) {
+                            activeRow.classList.remove('active');
+                        }
+                    });
+
+                    descRow.classList.toggle('active');
+                }
+            });
+        });
+
+        // Handle Selector Changes
+        document.querySelectorAll('.optional-selector').forEach(select => {
+            select.addEventListener('change', function() {
+                const row = this.closest('.course-row');
+                const descRow = row.nextElementSibling;
+                const selectedCode = this.value;
+                const course = optionalData.find(c => c['Kode Mata Kuliah'] === selectedCode);
+
+                if (course) {
+                    row.querySelector('.col-code strong').textContent = course['Kode Mata Kuliah'];
+                    row.querySelector('.col-sks').textContent = course['SKS'];
+                    descRow.querySelector('.desc-text').textContent = course['Deskripsi'];
+                    
+                    // Update data attributes for filtering
+                    row.setAttribute('data-name', course['Nama Mata Kuliah'].toLowerCase());
+                    row.setAttribute('data-code', course['Kode Mata Kuliah'].toLowerCase());
+                    
+                    // Open the description automatically on select
+                    descRow.classList.add('active');
+                }
+            });
+        });
+
+        searchInput.addEventListener('input', filterCourses);
+        semesterSelect.addEventListener('change', filterCourses);
+    });
+</script>
+
+<style>
+    .optional-selector {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        background: var(--bg-alt);
+        color: var(--primary-blue);
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+    .optional-selector:focus {
+        border-color: var(--accent-blue);
+        background: var(--white);
+    }
+    .selector-row .col-name {
+        min-width: 300px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard Admin{% endblock %} | PBA UIN Jakarta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --admin-primary: #002B5B;
+            --admin-accent: #0056b3;
+            --admin-bg: #f4f7fa;
+            --admin-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background: var(--admin-bg);
+            display: flex;
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        /* Sidebar Glassmorphism Style */
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--admin-primary) 0%, #001f3f 100%);
+            color: var(--white);
+            padding: 2.5rem 0;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-brand {
+            padding: 0 2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-brand img { 
+            height: 45px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+        }
+
+        .sidebar-brand span {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+            padding: 0 1rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1.5rem;
+            color: rgba(255,255,255,0.6);
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .nav-item svg { width: 18px; opacity: 0.7; }
+
+        /* Main Content Area */
+        .admin-main {
+            flex-grow: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2.5rem 4rem;
+            max-width: 1600px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .admin-header h2 {
+            font-size: 2rem;
+            color: var(--admin-primary);
+            font-weight: 800;
+        }
+
+        .admin-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--admin-card-shadow);
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(0,0,0,0.02);
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        .admin-card h3 {
+            font-size: 1.25rem;
+            color: var(--admin-primary);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .admin-card h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        /* Stats Cards - Modern Look */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--admin-card-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--admin-bg);
+            border-radius: 0 0 0 100%;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .stat-card small { 
+            position: relative;
+            z-index: 1;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card span { 
+            position: relative;
+            z-index: 1;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--admin-primary);
+        }
+
+        /* Form Styles - Professional */
+        .admin-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: var(--admin-bg);
+            border: 1px solid transparent;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            background: var(--white);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(0, 119, 200, 0.1);
+            outline: none;
+        }
+
+        .btn-logout {
+            background: #fee2e2;
+            color: #ef4444;
+            font-weight: 700;
+            padding: 0.65rem 1.25rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .btn-logout:hover {
+            background: #ef4444;
+            color: var(--white);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.75rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 1.25rem 1.5rem;
+            background: var(--admin-bg);
+            border: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        tr td:first-child { border-radius: 12px 0 0 12px; }
+        tr td:last-child { border-radius: 0 12px 12px 0; }
+
+        tr:hover td {
+            background: #edf2f7;
+            transform: scale(1.005);
+        }
+
+        .btn-danger {
+            background: #fee2e2;
+            color: #ef4444;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-danger:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Alert Styling */
+        .alert {
+            margin-bottom: 2rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0,0,0,0.05);
+            animation: fadeInUp 0.5s ease;
+            font-size: 0.95rem;
+        }
+        .alert-success { background: #dcfce7; color: #166534; }
+        .alert-danger { background: #fee2e2; color: #991b1b; }
+        .alert-warning { background: #fef9c3; color: #854d0e; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="admin-sidebar">
+        <div class="sidebar-brand">
+            <img src="{{ url_for('static', filename='assets/logo-uin.png') }}" alt="Logo">
+            <span>ADMIN PBA</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Dashboard
+            </a>
+            <a href="{{ url_for('manage_news') }}" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l4 4v10a2 2 0 0 1-2 2z"></path><polyline points="14 4 14 8 18 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Kelola Berita
+            </a>
+            <a href="{{ url_for('manage_events') }}" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Kelola Kegiatan
+            </a>
+            <a href="{{ url_for('manage_alumni') }}" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Alumni & Testimoni
+            </a>
+            <a href="{{ url_for('manage_mahasiswa') }}" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Data Mahasiswa
+            </a>
+            <a href="{{ url_for('manage_publications') }}" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Kelola Publikasi
+            </a>
+            <div style="margin-top: 2rem; padding: 0 1rem;">
+                <a href="{{ url_for('home') }}" class="btn btn-primary" style="width: 100%; border-radius: 12px; font-size: 0.8rem;" target="_blank">Lihat Website &rarr;</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="admin-main">
+        <header class="admin-header">
+            <h2>{% block page_title %}Overview{% endblock %}</h2>
+            <a href="{{ url_for('admin_logout') }}" class="btn-logout">Keluar Sistem</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                <strong>{{ category|capitalize }}:</strong> {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block admin_content %}{% endblock %}
+    </main>
+</body>
+</html>

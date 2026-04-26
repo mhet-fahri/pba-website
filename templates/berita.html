@@ -1,0 +1,155 @@
+{% extends 'layout.html' %}
+
+{% block title %}Berita Terbaru | PBA UIN Jakarta{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-news">
+    <div class="hero-overlay"></div>
+    <div class="container page-title">
+        <h1>{{ ui.berita }}</h1>
+        <p>Informasi terkini mengenai kegiatan akademik, penelitian, dan prestasi di lingkungan PBA UIN Jakarta.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="Akademik">Akademik</button>
+            <button class="filter-btn" data-filter="Kegiatan">Kegiatan</button>
+            <button class="filter-btn" data-filter="Pengumuman">Pengumuman</button>
+            <button class="filter-btn" data-filter="Prestasi">Prestasi</button>
+        </div>
+
+        <div class="news-grid">
+            {% for item in news %}
+            {% set display_title = item.title %}
+            {% set display_excerpt = item.excerpt %}
+            <article class="news-card reveal active" data-category="{{ item.category }}">
+                <div class="news-img {{ item.image_url }}" {% if item.image_url.startswith('http') %}style="background-image: url('{{ item.image_url }}'); background-size: cover; background-position: center;"{% endif %}></div>
+                <div class="news-content">
+                    <span class="news-tag">{{ item.category }}</span>
+                    <span class="news-date">{{ item.date }}</span>
+                    <h4>{{ display_title }}</h4>
+                    <p>{{ display_excerpt }}</p>
+                    <a href="{{ url_for('berita_detail', news_id=item.id) }}" class="btn-text">{{ ui.selengkapnya }} &rarr;</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<style>
+    .page-header-news {
+        background-color: var(--primary-blue);
+        background-image: linear-gradient(135deg, rgba(0, 69, 139, 0.9) 0%, rgba(0, 119, 200, 0.8) 100%);
+    }
+
+    .filter-bar {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 4rem;
+        flex-wrap: wrap;
+        padding: 0.5rem;
+        background: var(--bg-alt);
+        border-radius: 50px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .filter-btn {
+        padding: 0.75rem 2rem;
+        border-radius: 40px;
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.3px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .filter-btn:hover {
+        color: var(--primary-blue);
+        background: rgba(0, 69, 139, 0.05);
+    }
+
+    .filter-btn.active {
+        background: var(--primary-blue);
+        color: var(--white);
+        box-shadow: 0 10px 15px -3px rgba(0, 69, 139, 0.25);
+        transform: translateY(-2px);
+    }
+
+    .news-date {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .news-date::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: var(--accent-blue);
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .btn-text {
+        color: var(--primary-blue);
+        font-weight: 700;
+        font-size: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: gap 0.3s ease;
+    }
+
+    .btn-text:hover {
+        gap: 0.8rem;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.news-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => card.style.opacity = '1', 10);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

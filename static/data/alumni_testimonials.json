@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "name": "Ahmad Fauzi, M.Pd.",
+        "year": "Lulusan 2018",
+        "quote": "PBA UIN Jakarta memberikan landasan kuat bagi karir saya sebagai pendidik di sekolah internasional. Kurikulumnya sangat relevan dengan kebutuhan global.",
+        "image": "https://i.pravatar.cc/150?u=fauzi",
+        "instagram": "fauzi_pba",
+        "position": "Guru Bahasa Arab di Global Islamic School"
+    },
+    {
+        "id": 2,
+        "name": "Siti Aminah, S.Pd.",
+        "year": "Lulusan 2020",
+        "quote": "Pengalaman berorganisasi dan bimbingan dosen di PBA membantu saya dalam mengembangkan metode pengajaran yang kreatif dan inovatif.",
+        "image": "https://i.pravatar.cc/150?u=siti",
+        "instagram": "sitiaminah",
+        "position": "Content Creator Edukasi Bahasa Arab"
+    },
+    {
+        "id": 3,
+        "name": "Apip Ahmad",
+        "year": "Lulusan 2015",
+        "quote": "Tradisi akademik yang kuat di PBA UIN Jakarta memotivasi saya untuk melanjutkan studi hingga jenjang doktoral di luar negeri.",
+        "image": "https://i.pravatar.cc/150?u=luqman",
+        "instagram": "luqman_h",
+        "position": "Guru"
+    }
+]

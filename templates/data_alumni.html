@@ -1,0 +1,179 @@
+{% extends 'layout.html' %}
+
+{% block title %}Data Alumni | PBA UIN Jakarta{% endblock %}
+
+{% block extra_head %}
+<style>
+    .alumni-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+    }
+
+    .alumni-stat-card {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border-bottom: 4px solid var(--accent-blue);
+    }
+
+    .alumni-stat-value {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+    }
+
+    .alumni-stat-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .sector-chart-container {
+        background: var(--white);
+        padding: 3rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 4rem;
+    }
+
+    .sector-list {
+        margin-top: 2rem;
+    }
+
+    .sector-item {
+        margin-bottom: 1.5rem;
+    }
+
+    .sector-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .progress-bg {
+        background: var(--bg-alt);
+        height: 12px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(to right, var(--primary-blue), var(--accent-blue));
+        width: 0; /* Animated via JS */
+        transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .location-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+
+    .location-card {
+        background: var(--secondary-blue);
+        padding: 2.5rem;
+        border-radius: 16px;
+    }
+
+    .location-card h3 {
+        color: var(--primary-blue);
+        margin-bottom: 1.5rem;
+    }
+
+    .location-list li {
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(0, 69, 139, 0.1);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @media (max-width: 768px) {
+        .location-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-alumni">
+    <div class="hero-overlay"></div>
+    <div class="container page-title">
+        <h1>Data & Karir Alumni</h1>
+        <p>Potret keberhasilan lulusan Pendidikan Bahasa Arab UIN Syarif Hidayatullah Jakarta di dunia profesional.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="alumni-stats-grid">
+            {% for stat in data.summary %}
+            <div class="alumni-stat-card reveal active">
+                <div class="alumni-stat-value">{{ stat.value }}</div>
+                <div class="alumni-stat-label">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="sector-chart-container reveal active">
+            <h2 style="text-align: center; margin-bottom: 1rem;">Bidang Pekerjaan Alumni</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">Distribusi profesi lulusan berdasarkan data Tracer Study terbaru.</p>
+            
+            <div class="sector-list">
+                {% for sector in data.employment_sectors %}
+                <div class="sector-item">
+                    <div class="sector-info">
+                        <span>{{ sector.sector }}</span>
+                        <span>{{ sector.percentage }}%</span>
+                    </div>
+                    <div class="progress-bg">
+                        <div class="progress-bar" data-width="{{ sector.percentage }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="location-grid reveal active">
+            <div class="location-card">
+                <h3>Sebaran Lokasi Kerja</h3>
+                <ul class="location-list">
+                    {% for loc in data.work_locations %}
+                    <li>
+                        <span>{{ loc.location }}</span>
+                        <strong>{{ loc.count }} Alumni</strong>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="location-card" style="background: var(--primary-blue); color: var(--white);">
+                <h3 style="color: var(--white);">Tracer Study</h3>
+                <p style="margin-bottom: 2rem; opacity: 0.9;">Kontribusi Anda dalam mengisi Tracer Study sangat berharga bagi pengembangan kurikulum dan peningkatan kualitas program studi.</p>
+                <a href="https://s.id/TSUINJKT2026" target="_blank" class="btn" style="background: var(--white); color: var(--primary-blue);">Isi Formulir Tracer Study</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Animate progress bars
+        setTimeout(() => {
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                bar.style.width = bar.dataset.width;
+            });
+        }, 300);
+    });
+</script>
+{% endblock %}

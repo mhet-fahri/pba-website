@@ -1,0 +1,73 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}Kelola Alumni{% endblock %}
+{% block page_title %}Testimoni & Data Alumni{% endblock %}
+
+{% block admin_content %}
+<div class="admin-card">
+    <h3>Tambah Testimoni Alumni</h3>
+    <form method="POST" class="admin-form" style="margin-top: 1.5rem;">
+        <input type="hidden" name="action" value="add">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" name="name" class="form-control" placeholder="Contoh: Ahmad Fauzi, S.Pd." required>
+            </div>
+            <div class="form-group">
+                <label>Tahun Lulus</label>
+                <input type="text" name="year" class="form-control" placeholder="2020" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Pekerjaan/Posisi Saat Ini</label>
+                <input type="text" name="position" class="form-control" placeholder="Guru Bahasa Arab di MAN 4 Jakarta" required>
+            </div>
+            <div class="form-group">
+                <label>Username Instagram</label>
+                <input type="text" name="instagram" class="form-control" placeholder="ahmadfauzi" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Link Foto</label>
+            <input type="text" name="image" class="form-control" placeholder="https://example.com/foto.jpg" required>
+        </div>
+        <div class="form-group">
+            <label>Kutipan (Quote)</label>
+            <textarea name="quote" class="form-control" rows="3" placeholder="Tuliskan pengalaman atau pesan alumni..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan Testimoni</button>
+    </form>
+</div>
+
+<div class="admin-card">
+    <h3>Daftar Testimoni</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Lulus</th>
+                <th>Posisi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in testimonials|reverse %}
+            <tr>
+                <td><strong>{{ item.name }}</strong></td>
+                <td>{{ item.year }}</td>
+                <td>{{ item.position }}</td>
+                <td class="action-btns">
+                    <a href="{{ url_for('edit_alumni', alumni_id=item.id) }}" class="btn btn-sm btn-primary" style="background: var(--accent-blue); padding: 0.5rem 1rem; border-radius: 8px;">Edit</a>
+                    <form method="POST" onsubmit="return confirm('Yakin ingin menghapus testimoni ini?')" style="display: inline;">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" value="{{ item.id }}">
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

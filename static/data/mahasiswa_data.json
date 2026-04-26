@@ -1,0 +1,37 @@
+{
+    "stats": [
+        {
+            "label": "Mahasiswa Aktif",
+            "value": "452",
+            "description": "Total mahasiswa terdaftar pada semester berjalan."
+        },
+        {
+            "label": "Rasio Dosen-Mahasiswa",
+            "value": "1:22",
+            "description": "Rasio ideal untuk mendukung proses pembelajaran yang efektif."
+        },
+        {
+            "label": "Lulus Tepat Waktu",
+            "value": "88%",
+            "description": "Persentase mahasiswa yang lulus dalam kurun waktu 8 semester."
+        },
+        {
+            "label": "Rata-rata IPK",
+            "value": "3.58",
+            "description": "Pencapaian akademik rata-rata mahasiswa PBA."
+        }
+    ],
+    "enrollment_chart": [
+        {"year": "2020", "count": 105},
+        {"year": "2021", "count": 112},
+        {"year": "2022", "count": 118},
+        {"year": "2023", "count": 125},
+        {"year": "2024", "count": 132}
+    ],
+    "distribution": [
+        {"category": "Semester 2", "count": 132},
+        {"category": "Semester 4", "count": 125},
+        {"category": "Semester 6", "count": 118},
+        {"category": "Semester 8+", "count": 77}
+    ]
+}

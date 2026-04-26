@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PBA UIN Jakarta{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Modern Styles */
+        .logo { display: flex; align-items: center; }
+        .logo span { margin-left: 1.5rem; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="id-mode">
+    <header>
+        <div class="utility-nav">
+            <div class="container utility-content">
+                <div class="search-container">
+                    <button class="search-toggle" id="searchToggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span>{{ ui.search }}</span>
+                    </button>
+                    <div class="search-overlay" id="searchOverlay">
+                        <input type="text" id="searchInput" placeholder="{{ ui.search }}">
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="container main-nav">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='assets/logo-uin.png') }}" alt="Logo UIN Jakarta">
+                <span><strong>Pendidikan Bahasa Arab</strong><small>Fakultas Ilmu Tarbiyah dan Keguruan</small><small>UIN Syarif Hidayatullah Jakarta</small></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" class="nav-link">{{ ui.beranda }}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">{{ ui.profil }}</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('sejarah') }}">Sejarah</a></li>
+                        <li><a href="{{ url_for('visi') }}">Visi Keilmuan</a></li>
+                        <li><a href="{{ url_for('tujuan') }}">Tujuan</a></li>
+                        <li><a href="{{ url_for('lulusan') }}">Profil Lulusan</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">{{ ui.kurikulum }}</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('cpl') }}">Capaian Pembelajaran Lulusan (CPL)</a></li>
+                        <li><a href="{{ url_for('mata_kuliah') }}">Mata Kuliah</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('dosen') }}" class="nav-link">{{ ui.dosen }}</a></li>
+                <li><a href="{{ url_for('research') }}" class="nav-link">{{ ui.riset }}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">{{ ui.mahasiswa }}</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://s.id/pba-uinjkt?s=qr" target="_blank">Layanan</a></li>
+                        <li><a href="{{ url_for('mahasiswa_data') }}">Data</a></li>
+                        <li><a href="{{ url_for('prestasi') }}">Prestasi</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">{{ ui.alumni }}</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('alumni_data') }}">Data</a></li>
+                        <li><a href="https://s.id/TSUINJKT2026" target="_blank">Formulir Tracer Study</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('berita') }}" class="nav-link">{{ ui.berita }}</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Program Studi</h4>
+                    <ul>
+                        <li><a href="#">Visi & Misi</a></li>
+                        <li><a href="#">Kurikulum</a></li>
+                        <li><a href="{{ url_for('dosen') }}">Staf Pengajar</a></li>
+                        <li><a href="#">Akreditasi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul>
+                        <li><a href="#">Pendaftaran Online</a></li>
+                        <li><a href="#">Jadwal Kuliah</a></li>
+                        <li><a href="#">Kalender Akademik</a></li>
+                        <li><a href="#">Pusat Bantuan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Tentang UIN</h4>
+                    <ul>
+                        <li><a href="#">Kontak Kami</a></li>
+                        <li><a href="#">Direktori Staf</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Peta Kampus</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <p>Jl. Ir. H. Juanda No. 95<br>Ciputat, Tangerang Selatan<br>Banten 15412</p>
+                    <p>Telp: +62 21 7401925</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PBA UIN Syarif Hidayatullah Jakarta. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

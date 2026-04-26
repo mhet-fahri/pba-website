@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "title": "Juara 1 Musabaqah Qira'atul Kutub (MQK) Nasional",
+        "name": "Ahmad Fauzi",
+        "year": "2024",
+        "category": "Nasional",
+        "achievement": "Juara 1",
+        "institution": "Kemenag RI",
+        "description": "Berhasil meraih peringkat pertama dalam kategori pembacaan kitab klasik tingkat mahasiswa nasional."
+    },
+    {
+        "id": 2,
+        "title": "Best Speaker Arabic Debate Competition",
+        "name": "Siti Aminah",
+        "year": "2023",
+        "category": "Internasional",
+        "achievement": "Best Speaker",
+        "institution": "International Islamic University Malaysia (IIUM)",
+        "description": "Meraih penghargaan pembicara terbaik dalam ajang debat bahasa Arab internasional."
+    },
+    {
+        "id": 3,
+        "title": "Juara 2 Kaligrafi Kontemporer",
+        "name": "Rizky Ramadhan",
+        "year": "2024",
+        "category": "Provinsi",
+        "achievement": "Juara 2",
+        "institution": "MTQ Provinsi Banten",
+        "description": "Menampilkan karya seni kaligrafi dengan perpaduan gaya klasik dan modern."
+    },
+    {
+        "id": 4,
+        "title": "Delegasi Model United Nations (MUN)",
+        "name": "Farhana Yasmin",
+        "year": "2023",
+        "category": "Internasional",
+        "achievement": "Honorable Mention",
+        "institution": "Singapore MUN",
+        "description": "Mewakili universitas dalam simulasi sidang PBB dengan fokus pada isu-isu Timur Tengah."
+    },
+    {
+        "id": 5,
+        "title": "Juara 1 Pidato Bahasa Arab",
+        "name": "Zulkifli",
+        "year": "2024",
+        "category": "Nasional",
+        "achievement": "Juara 1",
+        "institution": "Festival Jazirah Arab (FJA) UIN Malang",
+        "description": "Menyampaikan pidato tentang peran pemuda dalam pelestarian literatur Arab."
+    }
+]

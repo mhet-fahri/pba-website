@@ -1,0 +1,86 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}Kelola Kegiatan{% endblock %}
+{% block page_title %}Jadwal & Agenda Kegiatan{% endblock %}
+
+{% block admin_content %}
+<div class="admin-card">
+    <h3>Tambah Kegiatan Baru</h3>
+    <form method="POST" class="admin-form" style="margin-top: 1.5rem;">
+        <input type="hidden" name="action" value="add">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nama Kegiatan</label>
+                <input type="text" name="title" class="form-control" placeholder="Contoh: Webinar Internasional" required>
+            </div>
+            <div class="form-group">
+                <label>Tipe Kegiatan</label>
+                <select name="type" class="form-control" required>
+                    <option value="Webinar">Webinar</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Seminar">Seminar</option>
+                    <option value="Kuliah Umum">Kuliah Umum</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Tanggal (Angka)</label>
+                <input type="text" name="day" class="form-control" placeholder="15" required>
+            </div>
+            <div class="form-group">
+                <label>Bulan (Singkatan)</label>
+                <input type="text" name="month" class="form-control" placeholder="AUG" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Waktu</label>
+                <input type="text" name="time" class="form-control" placeholder="09:00 - 12:00 WIB" required>
+            </div>
+            <div class="form-group">
+                <label>Lokasi</label>
+                <input type="text" name="location" class="form-control" placeholder="Zoom Meeting / Aula FITK" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Link Gambar</label>
+            <input type="text" name="image" class="form-control" placeholder="https://example.com/image.jpg" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan Kegiatan</button>
+    </form>
+</div>
+
+<div class="admin-card">
+    <h3>Daftar Kegiatan</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Tanggal</th>
+                <th>Kegiatan</th>
+                <th>Tipe</th>
+                <th>Lokasi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in events|reverse %}
+            <tr>
+                <td>{{ item.day }} {{ item.month }}</td>
+                <td><strong>{{ item.title }}</strong><br><small>{{ item.time }}</small></td>
+                <td>{{ item.type }}</td>
+                <td>{{ item.location }}</td>
+                <td class="action-btns">
+                    <a href="{{ url_for('edit_event', event_id=item.id) }}" class="btn btn-sm btn-primary" style="background: var(--accent-blue); padding: 0.5rem 1rem; border-radius: 8px;">Edit</a>
+                    <form method="POST" onsubmit="return confirm('Yakin ingin menghapus kegiatan ini?')" style="display: inline;">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" value="{{ item.id }}">
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

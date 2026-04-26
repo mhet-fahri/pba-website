@@ -1,0 +1,67 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %}Edit Publikasi{% endblock %}
+{% block page_title %}Sunting Data Publikasi{% endblock %}
+
+{% block admin_content %}
+<div class="admin-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h3>Sunting Detail Publikasi</h3>
+        <a href="{{ url_for('manage_publications') }}" style="color: var(--text-secondary); font-size: 0.9rem; text-decoration: none;">&larr; Kembali ke Daftar</a>
+    </div>
+    
+    <form method="POST" class="admin-form">
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+                <label>Tahun</label>
+                <input type="number" name="year" class="form-control" value="{{ item.year }}" required>
+            </div>
+            <div class="form-group">
+                <label>Tipe</label>
+                <select name="type" class="form-control" required>
+                    <option value="Journal" {% if item.type == 'Journal' %}selected{% endif %}>Jurnal</option>
+                    <option value="Book" {% if item.type == 'Book' %}selected{% endif %}>Buku</option>
+                    <option value="Proceeding" {% if item.type == 'Proceeding' %}selected{% endif %}>Prosiding</option>
+                    <option value="Other" {% if item.type == 'Other' %}selected{% endif %}>Lainnya</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Kategori</label>
+                <select name="category" class="form-control" required>
+                    <option value="Technology" {% if item.category == 'Technology' %}selected{% endif %}>Technology</option>
+                    <option value="Linguistics" {% if item.category == 'Linguistics' %}selected{% endif %}>Linguistics</option>
+                    <option value="Pedagogy" {% if item.category == 'Pedagogy' %}selected{% endif %}>Pedagogy</option>
+                    <option value="Curriculum" {% if item.category == 'Curriculum' %}selected{% endif %}>Curriculum</option>
+                    <option value="Research Method" {% if item.category == 'Research Method' %}selected{% endif %}>Research Method</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Judul Publikasi</label>
+            <input type="text" name="title" class="form-control" value="{{ item.title }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Penulis</label>
+            <input type="text" name="authors" class="form-control" value="{{ item.authors }}" required>
+        </div>
+
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+                <label>Penerbit / Nama Jurnal</label>
+                <input type="text" name="publisher" class="form-control" value="{{ item.publisher }}" required>
+            </div>
+            <div class="form-group">
+                <label>Link (URL)</label>
+                <input type="text" name="link" class="form-control" value="{{ item.link }}" required>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button type="submit" class="btn btn-primary" style="flex: 1; height: 3.5rem; font-size: 1.1rem;">Simpan Perubahan</button>
+            <a href="{{ url_for('manage_publications') }}" class="btn" style="flex: 0.3; text-align: center; line-height: 3.5; border-radius: 12px; background: #eee; color: #333; text-decoration: none; font-weight: 600;">Batalkan</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Sidang Munaqasyah Skripsi - Gelombang II",
+        "date": "2026-05-15",
+        "time": "08:00 - 16:00",
+        "location": "Ruang Sidang Lt. 3",
+        "type": "Sidang",
+        "image": "https://images.unsplash.com/photo-1523050335392-93851179ae22?auto=format&fit=crop&q=80&w=200"
+    },
+    {
+        "id": 2,
+        "title": "Workshop Metodologi Penelitian Kualitatif",
+        "date": "2026-05-20",
+        "time": "09:00 - 12:00",
+        "location": "Lab Bahasa",
+        "type": "Workshop",
+        "image": "https://images.unsplash.com/photo-1544531585-9847b68c8c86?auto=format&fit=crop&q=80&w=200"
+    },
+    {
+        "id": 3,
+        "title": "Seminar Internasional Literasi Digital",
+        "date": "2026-06-05",
+        "time": "08:30 - 15:00",
+        "location": "Aula Madya",
+        "type": "Seminar",
+        "image": "https://images.unsplash.com/photo-1475721027187-4024733923f9?auto=format&fit=crop&q=80&w=200"
+    },
+    {
+        "id": 4,
+        "title": "Annual Arabic Language Conference (AALC)",
+        "date": "2026-08-12",
+        "time": "08:00 - 17:00",
+        "location": "Auditorium Harun Nasution",
+        "type": "Conference",
+        "image": "https://images.unsplash.com/photo-1505373633560-fa4a260de8c3?auto=format&fit=crop&q=80&w=200"
+    }
+]

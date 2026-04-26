@@ -1,0 +1,182 @@
+[
+    {
+        "nama": "Mukhshon Nawawi, M.A.",
+        "nip": "197311131997031001",
+        "jabatan": "Ketua Program Studi",
+        "bidang": "Kurikulum & Evaluasi Pendidikan Bahasa Arab",
+        "pendidikan": "S2 UIN Syarif Hidayatullah Jakarta",
+        "email": "mukhshon@uinjkt.ac.id",
+        "foto": "dosen1.png"
+    },
+    {
+        "nama": "Iman Matin, M.Pd.",
+        "nip": "198602172020121005",
+        "jabatan": "Sekretaris Program Studi",
+        "bidang": "Linguistik Arab & Filologi",
+        "pendidikan": "S2 Universitas Al-Azhar, Mesi",
+        "email": "matin.pba@uinjkt.ac.id",
+        "foto": "dosen2.png"
+    },
+    {
+        "nama": "Dr. H. Muhbib, M.Ag.",
+        "nip": "196810231993031002",
+        "jabatan": "Lektor Kepala",
+        "bidang": "Sastra Arab & Kebudayaan",
+        "pendidikan": "S3 Universitas Indonesia",
+        "email": "muhbib@uinjkt.ac.id",
+        "foto": "dosen3.png"
+    },
+    {
+        "nama": "Prof. Dr. Raswan, M.Pd.I., M.Pd.",
+        "nip": "197211102003121001",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Evaluasi Pembelajaran Bahasa Arab",
+        "pendidikan": "S3 UIN Syarif Hidayatullah Jakarta",
+        "email": "ahmad.muradi@uinjkt.ac.id",
+        "foto": "dosen4.png"
+    },
+    {
+        "nama": "Dr. H. M. Kholid, M.A.",
+        "nip": "196905051998031002",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Penerjemahan Arab-Indonesia",
+        "pendidikan": "S3 Universitas Umm Al-Qura, Mekkah",
+        "email": "m.kholid@uinjkt.ac.id",
+        "foto": "dosen5.png"
+    },
+    {
+        "nama": "Siti Nurjanah, M.Pd.",
+        "nip": "198501252015032001",
+        "jabatan": "Dosen Muda",
+        "bidang": "Teknologi Pendidikan Bahasa Arab",
+        "pendidikan": "S2 UIN Syarif Hidayatullah Jakarta",
+        "email": "siti.nurjanah@uinjkt.ac.id",
+        "foto": "dosen6.png"
+    },
+    {
+        "nama": "Dr. Faizal Ahmad, M.Pd.I.",
+        "nip": "198004122010011005",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Metodologi Pembelajaran Bahasa Arab",
+        "pendidikan": "S3 UIN Maulana Malik Ibrahim",
+        "email": "faizal.ahmad@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dr. Luthfi Rabbani, M.A.",
+        "nip": "197709182008011004",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Filologi Arab & Studi Islam",
+        "pendidikan": "S3 Universitas Leiden, Belanda",
+        "email": "luthfi.r@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dra. Hajah Fatimah, M.A.",
+        "nip": "196502101992032001",
+        "jabatan": "Dosen Senior",
+        "bidang": "Kemahiran Bahasa (Maharah)",
+        "pendidikan": "S2 Universitas Khartum, Sudan",
+        "email": "fatimah@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "H. Muhammad Zaki, Ph.D.",
+        "nip": "198306202011011002",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Linguistik Terapan",
+        "pendidikan": "S3 Universitas Jordan",
+        "email": "zaki.phd@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dr. Aminah Hasanah, M.Pd.",
+        "nip": "198807152019032005",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Psikolinguistik",
+        "pendidikan": "S3 Universitas Pendidikan Indonesia",
+        "email": "aminah.h@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dr. Ridwanullah, M.Ag.",
+        "nip": "197403252005011001",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Sosiolinguistik",
+        "pendidikan": "S3 UIN Sunan Kalijaga",
+        "email": "ridwanullah@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Sarah Azizah, M.A.",
+        "nip": "199201102022032008",
+        "jabatan": "Dosen Muda",
+        "bidang": "Sastra Arab Modern",
+        "pendidikan": "S2 SOAS University of London",
+        "email": "sarah.azizah@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dr. Yusuf Mansur, M.Pd.",
+        "nip": "197911052009121002",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Manajemen Pendidikan Bahasa",
+        "pendidikan": "S3 Universitas Negeri Jakarta",
+        "email": "yusuf.mansur@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dr. Halimah Sadiah, M.A.",
+        "nip": "198110222010012003",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Kritik Sastra Arab",
+        "pendidikan": "S3 Universitas King Saud, Riyadh",
+        "email": "halimah.s@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Ahmad Fauzi, M.Pd.I.",
+        "nip": "198605142018011004",
+        "jabatan": "Dosen Muda",
+        "bidang": "Media Pembelajaran Digital",
+        "pendidikan": "S2 UIN Syarif Hidayatullah Jakarta",
+        "email": "ahmad.fauzi@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dr. Nurul Huda, M.A.",
+        "nip": "197309082003121002",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Balaghah & Arudh",
+        "pendidikan": "S3 Universitas Yarmouk, Yordania",
+        "email": "nurul.huda@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "H. Ismail Marzuki, M.Ed.",
+        "nip": "198402282011011003",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Pendidikan Bahasa Kedua",
+        "pendidikan": "S2 Monash University, Australia",
+        "email": "ismail.m@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dr. Khairunnisa, M.A.",
+        "nip": "198705302015032002",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Sejarah Kebudayaan Islam",
+        "pendidikan": "S3 Universitas Malaya",
+        "email": "khairunnisa@uinjkt.ac.id",
+        "foto": ""
+    },
+    {
+        "nama": "Dr. Abdul Aziz, M.Ag.",
+        "nip": "197608122006041002",
+        "jabatan": "Dosen Tetap",
+        "bidang": "Fikih Lughah",
+        "pendidikan": "S3 UIN Syarif Hidayatullah Jakarta",
+        "email": "abdul.aziz@uinjkt.ac.id",
+        "foto": ""
+    }
+]

@@ -1,0 +1,206 @@
+{% extends 'layout.html' %}
+
+{% block title %}Staf Pengajar | PBA UIN Jakarta{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-dosen">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="page-title reveal">
+            <h1>Staf Pengajar</h1>
+            <p>Mengenal lebih dekat para pakar dan pendidik di Program Studi Pendidikan Bahasa Arab UIN Syarif Hidayatullah Jakarta.</p>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="dosen-grid">
+            {% for d in dosen %}
+            <div class="dosen-card reveal">
+                <div class="dosen-img-wrapper">
+                    {% if d.foto and d.foto != "" %}
+                    <img src="{{ url_for('static', filename='assets/' + d.foto) }}" alt="{{ d.nama }}" class="dosen-img" onerror="this.src='https://ui-avatars.com/api/?name={{ d.nama }}&background=00458B&color=fff&size=512'">
+                    {% else %}
+                    <div class="dosen-placeholder">
+                        <span>{{ d.nama[0] }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="dosen-social">
+                    <a href="#" title="Google Scholar"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></a>
+                    <a href="#" title="PDDikti"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg></a>
+                    <a href="mailto:{{ d.email }}" title="Email"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+                </div>
+                <div class="dosen-info">
+                    <span class="dosen-tag">{{ d.jabatan }}</span>
+                    <h3>{{ d.nama }}</h3>
+                    {% if d.nip %}
+                    <p class="dosen-nip">NIP: {{ d.nip }}</p>
+                    {% endif %}
+                    <p class="dosen-bidang"><strong>Bidang:</strong> {{ d.bidang }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<style>
+    .page-header-dosen {
+        background-image: url('../static/assets/uin-jakarta.jpg');
+    }
+    
+    .dosen-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2.5rem;
+        padding: 3rem 0;
+    }
+
+    .dosen-card {
+        background: var(--white);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+    }
+
+    .dosen-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 69, 139, 0.1);
+        border-color: var(--accent-blue);
+    }
+
+    .dosen-img-wrapper {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: var(--bg-alt);
+        margin-bottom: 1.5rem;
+        border: 4px solid var(--white);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        flex-shrink: 0;
+    }
+
+    .dosen-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .dosen-card:hover .dosen-img {
+        transform: scale(1.1);
+    }
+
+    .dosen-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-blue);
+        color: var(--white);
+        font-size: 3rem;
+        font-weight: 800;
+    }
+
+    .dosen-social {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        justify-content: center;
+    }
+
+    .dosen-social a {
+        width: 34px;
+        height: 34px;
+        background: var(--bg-alt);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+        border: 1px solid var(--border-color);
+    }
+
+    .dosen-social a:hover {
+        background: var(--primary-blue);
+        color: var(--white);
+        transform: translateY(-3px);
+        border-color: var(--primary-blue);
+    }
+
+    .dosen-info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .dosen-tag {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--accent-blue);
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.05em;
+    }
+
+    .dosen-info h3 {
+        color: var(--primary-blue);
+        font-size: 1.2rem;
+        margin-bottom: 0.25rem;
+        line-height: 1.3;
+        font-weight: 700;
+    }
+
+    .dosen-nip {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        font-family: 'Courier New', Courier, monospace;
+        background: var(--bg-alt);
+        padding: 4px 10px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+
+    .dosen-bidang {
+        font-size: 0.9rem;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .dosen-edu {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 480px) {
+        .dosen-grid {
+            grid-template-columns: 1fr;
+        }
+        .dosen-img-wrapper {
+            width: 140px;
+            height: 140px;
+        }
+    }
+</style>
+{% endblock %}

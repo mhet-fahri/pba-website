@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "title": "Pengembangan Media Pembelajaran Bahasa Arab Berbasis Mobile Learning untuk Mahasiswa",
+        "authors": "Mukhshon Nawawi, Ahmad Fauzi",
+        "year": 2023,
+        "type": "Journal",
+        "publisher": "Jurnal Pendidikan Bahasa Arab (Arabiyat)",
+        "link": "#",
+        "category": "Technology"
+    },
+    {
+        "id": 2,
+        "title": "Analisis Kontrastif Fonologi Bahasa Arab dan Bahasa Indonesia dalam Pembelajaran Maharah Istima",
+        "authors": "Iman Matin",
+        "year": 2022,
+        "type": "Journal",
+        "publisher": "Al-Lisan: Jurnal Bahasa dan Pengajarannya",
+        "link": "#",
+        "category": "Linguistics"
+    },
+    {
+        "id": 3,
+        "title": "Strategi Pembelajaran Kosakata Bahasa Arab bagi Penutur Non-Arab di Perguruan Tinggi Keagamaan Islam",
+        "authors": "Prof. Dr. Raswan",
+        "year": 2023,
+        "type": "Book",
+        "publisher": "Rajawali Press",
+        "link": "#",
+        "category": "Pedagogy"
+    },
+    {
+        "id": 4,
+        "title": "Implementation of Blended Learning in Arabic Language Teaching: A Case Study at UIN Jakarta",
+        "authors": "Dr. H. Muhbib, Siti Nurjanah",
+        "year": 2021,
+        "type": "Proceeding",
+        "publisher": "International Conference on Arabic Language and Literature",
+        "link": "#",
+        "category": "Technology"
+    },
+    {
+        "id": 5,
+        "title": "Evolusi Kurikulum Pendidikan Bahasa Arab di Indonesia dari Masa ke Masa",
+        "authors": "Mukhshon Nawawi",
+        "year": 2022,
+        "type": "Journal",
+        "publisher": "Jurnal Pendidikan Islam",
+        "link": "#",
+        "category": "Curriculum"
+    },
+    {
+        "id": 6,
+        "title": "Kamus Istilah Linguistik Arab-Indonesia",
+        "authors": "Dr. Luthfi Rabbani",
+        "year": 2020,
+        "type": "Book",
+        "publisher": "Prenada Media",
+        "link": "#",
+        "category": "Linguistics"
+    },
+    {
+        "id": 7,
+        "title": "The Role of Digital Literacy in Enhancing Arabic Writing Skills Among University Students",
+        "authors": "Ahmad Fauzi, Faizal Ahmad",
+        "year": 2023,
+        "type": "Journal",
+        "publisher": "Education and Information Technologies",
+        "link": "#",
+        "category": "Technology"
+    },
+    {
+        "id": 8,
+        "title": "Metode Penelitian Pendidikan Bahasa Arab: Teori dan Praktik",
+        "authors": "Dr. Ahmad Muradi",
+        "year": 2021,
+        "type": "Book",
+        "publisher": "Kencana",
+        "link": "#",
+        "category": "Research Method"
+    }
+]
