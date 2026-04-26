@@ -462,7 +462,7 @@ def manage_mahasiswa():
 
 if __name__ == '__main__':
     import sys
-    port = 5001 # Changed from 5000 to avoid macOS AirPlay conflict
+    port = 5001 # Default to 5001 to avoid macOS conflict
     if '--port' in sys.argv:
         try:
             port_idx = sys.argv.index('--port') + 1
@@ -470,6 +470,8 @@ if __name__ == '__main__':
         except (IndexError, ValueError):
             pass
             
-    print(f"Website PBA UIN Jakarta berjalan di http://127.0.0.1:{port}")
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    # Use environment PORT if available (for Vercel), otherwise use our port
+    final_port = int(os.environ.get('PORT', port))
+    print(f"Website PBA UIN Jakarta berjalan di http://127.0.0.1:{final_port}")
+    # Enable debug=True for automatic reload on changes
+    app.run(host='0.0.0.0', port=final_port, debug=True)

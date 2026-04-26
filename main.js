@@ -60,61 +60,94 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
 
-    searchToggle.addEventListener('click', () => {
-        searchContainer.classList.toggle('active');
-        if (searchContainer.classList.contains('active')) {
-            searchInput.focus();
-        }
-    });
+    if (searchToggle && searchContainer) {
+        searchToggle.addEventListener('click', () => {
+            searchContainer.classList.toggle('active');
+            if (searchContainer.classList.contains('active')) {
+                searchInput.focus();
+            }
+        });
 
-    // Close search on escape or click outside
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') searchContainer.classList.remove('active');
-    });
+        // Close search on escape or click outside
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') searchContainer.classList.remove('active');
+        });
 
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        if (query.length < 2) {
-            searchResults.classList.remove('active');
-            return;
-        }
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (query.length < 2) {
+                searchResults.classList.remove('active');
+                return;
+            }
 
-        // Search through all relevant content tags
-        const tags = ['h1', 'h2', 'h3', 'h4', 'p', 'a'];
-        const results = [];
-        const seen = new Set();
+            // Search through all relevant content tags
+            const tags = ['h1', 'h2', 'h3', 'h4', 'p', 'a'];
+            const results = [];
+            const seen = new Set();
 
-        tags.forEach(tag => {
-            document.querySelectorAll(tag).forEach(el => {
-                const text = el.innerText.trim();
-                if (text && text.toLowerCase().includes(query) && !seen.has(text)) {
-                    if (el.closest('.search-container')) return; // Don't search the search bar itself
-                    results.push(text);
-                    seen.add(text);
-                }
+            tags.forEach(tag => {
+                document.querySelectorAll(tag).forEach(el => {
+                    const text = el.innerText.trim();
+                    if (text && text.toLowerCase().includes(query) && !seen.has(text)) {
+                        if (el.closest('.search-container')) return; // Don't search the search bar itself
+                        results.push(text);
+                        seen.add(text);
+                    }
+                });
+            });
+
+            if (results.length > 0) {
+                searchResults.innerHTML = results.slice(0, 8).map(res => {
+                    const index = res.toLowerCase().indexOf(query);
+                    const highlighted = res.substring(0, index) + 
+                        `<mark>${res.substring(index, index + query.length)}</mark>` + 
+                        res.substring(index + query.length);
+                    return `<div class="search-item">${highlighted}</div>`;
+                }).join('');
+                searchResults.classList.add('active');
+            } else {
+                searchResults.innerHTML = '<div class="search-item">Tidak ditemukan hasil...</div>';
+                searchResults.classList.add('active');
+            }
+        });
+
+        // Close results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!searchContainer.contains(e.target)) {
+                searchContainer.classList.remove('active');
+                searchResults.classList.remove('active');
+            }
+        });
+    }
+
+    // Mobile Menu Toggle Logic
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
             });
         });
 
-        if (results.length > 0) {
-            searchResults.innerHTML = results.slice(0, 8).map(res => {
-                const index = res.toLowerCase().indexOf(query);
-                const highlighted = res.substring(0, index) + 
-                    `<mark>${res.substring(index, index + query.length)}</mark>` + 
-                    res.substring(index + query.length);
-                return `<div class="search-item">${highlighted}</div>`;
-            }).join('');
-            searchResults.classList.add('active');
-        } else {
-            searchResults.innerHTML = '<div class="search-item">Tidak ditemukan hasil...</div>';
-            searchResults.classList.add('active');
-        }
-    });
-
-    // Close results when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!searchContainer.contains(e.target)) {
-            searchContainer.classList.remove('active');
-            searchResults.classList.remove('active');
-        }
-    });
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
 });
